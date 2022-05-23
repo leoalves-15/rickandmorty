@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div>
+      <NewGrid>
       <div v-for="episode in episodes.results" :key="episode.id">
         <EpisodeCard
           :id="episode.id"
@@ -10,6 +11,7 @@
           :characters="episode.characters"
         />
       </div>
+      </NewGrid>
     </div>
     <button @click="handdlePagination">teste</button>
   </div>
@@ -18,11 +20,13 @@
 <script>
 import gql from 'graphql-tag'
 import EpisodeCard from '@/stories/components/EpisodeCard/EpisodeCard.vue'
+import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
 
 export default {
   name: 'EpisodesPage',
   components: {
-    EpisodeCard
+    EpisodeCard,
+    NewGrid
 },
   data: () => ({
     page: 1
