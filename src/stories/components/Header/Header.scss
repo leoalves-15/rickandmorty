@@ -1,0 +1,41 @@
+.header-container{
+    max-width: 1300px;
+    width: 1300px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.header-logo-container{
+    display: flex;
+    >a{
+        display: flex;
+        height: 100%;
+    }
+
+}
+.header-list-container{
+    width: 50%;
+    >nav{
+        >ul{
+            display: flex;
+            justify-content: flex-end;
+            list-style-type: none;
+        }
+        li{
+            cursor: pointer;
+            margin-right: 50px;
+        }
+        a {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color:#333333;
+            font-weight: bold;
+            text-decoration: none;
+            &.router-link-exact-active {
+                color: #ff9800;
+            }
+        }
+    }
+}
