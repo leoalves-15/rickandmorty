@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="CharacterPage"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import gql from 'graphql-tag'
 
 export default {
   name: 'CharacterPage',
   components: {
-    HelloWorld
-  }
+  },
+  apollo: {
+    characters: gql`query {
+      characters(page: 2, filter: { name: "rick" }) {
+        results {
+          name,
+        }
+      }
+    }`,
+  },
 }
 </script>
