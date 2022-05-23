@@ -1,7 +1,15 @@
 <template>
   <div class="home">
     <div>
-    <div v-for="episode in episodes.results" :key="episode.id">{{episode}}</div>
+      <div v-for="episode in episodes.results" :key="episode.id">
+        <EpisodeCard
+          :id="episode.id"
+          :name="episode.name"
+          :air_date="episode.air_date"
+          :episode="episode.episode"
+          :characters="episode.characters"
+        />
+      </div>
     </div>
     <button @click="handdlePagination">teste</button>
   </div>
@@ -9,12 +17,13 @@
 
 <script>
 import gql from 'graphql-tag'
-
+import EpisodeCard from '@/stories/components/EpisodeCard/EpisodeCard.vue'
 
 export default {
   name: 'EpisodesPage',
   components: {
-  },
+    EpisodeCard
+},
   data: () => ({
     page: 1
   }),
