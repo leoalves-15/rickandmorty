@@ -1,16 +1,15 @@
 <template>
   <div class="home">
     <div>
-      <NewGrid>
-      <div v-for="episode in episodes.results" :key="episode.id">
+      <NewGrid :columns="four-columns">
         <EpisodeCard
+          v-for="episode in episodes.results" :key="episode.id"
           :id="episode.id"
           :name="episode.name"
           :air_date="episode.air_date"
           :episode="episode.episode"
           :characters="episode.characters"
         />
-      </div>
       </NewGrid>
     </div>
     <NewPagination :allpages="pages" :currentPage="page" @changePage="handdlePagination"/>
@@ -41,19 +40,13 @@ export default {
       }
       return pagesAux;
     },
-    currentPage(){
-      return 3
-    }
   },
   apollo: {
     episodes: {
       query : gql`query episodes($page: Int!){
       episodes(page: $page){
         info{
-          pages,
-          count,
-          next, 
-          prev
+          pages
         }
         results{
           id,
@@ -88,7 +81,6 @@ export default {
             episodes: {
               __typename: previousResult.episodes.__typename,
               info: previousResult.episodes.info,
-              // results: [...previousResult.episodes.results, ...newEps]
               results: newEps
             },
           }

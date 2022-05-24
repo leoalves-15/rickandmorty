@@ -1,5 +1,5 @@
 <template>
-    <div class="new-grid">
+    <div :class="columns == 'two-columns' ? 'two-columns' :'four-columns'">
         <slot></slot>
     </div>
 </template>
@@ -8,6 +8,12 @@
 import './NewGrid.scss';
 
 export default {
-  name: 'NewGrid'
+  name: 'NewGrid',
+  props:{
+    columns: {
+      type:String,
+      default: 'two-columns'
+    }
+  }
 }
 </script>

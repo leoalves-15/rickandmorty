@@ -10,11 +10,11 @@
         </div>
         <div class="character-card-info">
             <span class="character-card-info-lable">Last known location:</span>
-            <!-- <span class="character-card-info-value">{{location?.name}}</span> -->
+            <span class="character-card-info-value">{{location.name}}</span>
         </div>
         <div class="character-card-info">
             <span class="character-card-info-lable">Origin:</span>
-            <!-- <span class="character-card-info-value">{{origin?.name}}</span> -->
+            <span class="character-card-info-value">{{origin.name}}</span>
         </div>
     </div>
   </article>
@@ -31,7 +31,6 @@ export default {
     name: String,
     status: String,
     species: String,
-    gender: String,
     origin: {
       type: Object,
       name: String,

@@ -19,7 +19,6 @@ Morty.args = {
   name: 'Fat Morty',
   status: 'Alive',
   species: 'Human',
-  gender: 'Male',
   origin: {
     name: 'unknown',
     url: '',
