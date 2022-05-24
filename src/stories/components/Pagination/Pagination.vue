@@ -1,14 +1,20 @@
 <template>
     <div class="pagination-container">
-      <div class="pagination-page">{{allpages[0]}}</div>
-      <div class="pagination-page">...</div>
+      <div v-show="first" class="pagination-page" @click="$emit('changePage', allpages[0])">{{allpages[0]}}</div>
+      <div v-show="first" class="pagination-page">...</div>
       <div v-for="page in showPages" :key="page" 
         :class="page == currentPage ? 'pagination-current-page' : 'pagination-page'"
+        aria-hidden="true"
+        @click="$emit('changePage', page)"
       >
         {{page}}
       </div>
-      <div class="pagination-page">...</div>
-      <div class="pagination-page">{{allpages.length}}</div>
+      <div v-show="last" class="pagination-page">...</div>
+      <div v-show="last" class="pagination-page"
+        @click="$emit('changePage', allpages.length)"
+      >
+      {{allpages.length}}
+      </div>
     </div>
 </template>
 
@@ -17,20 +23,23 @@ import './Pagination.scss';
 
 export default {
   name: 'NewPagination',
-  data: () => ({
-    showPages: []
-  }),
+  emits: ['changePage'],
   props: {
     allpages: Array,
     currentPage: Number
   },
-  watch:{
-    currentPage(){
+  computed:{
+    showPages() {
       if( this.currentPage <= 3){
-        this.showPages = this.allpages.slice(0, 5);
-      }else{
-        this.showPages = this.allpages.slice(this.currentPage - 3, this.currentPage - (-2));
+        return this.allpages.slice(0, 5);
       }
+     return this.allpages.slice(this.currentPage - 3, this.currentPage - (-2));
+    },
+    first(){
+      return this.currentPage === 1 ? false : true; 
+    },
+    last(){
+      return this.currentPage === this.allpages.length ? false : true; 
     }
   }
 }

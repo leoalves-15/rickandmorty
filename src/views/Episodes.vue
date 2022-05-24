@@ -13,7 +13,7 @@
       </div>
       </NewGrid>
     </div>
-    <button @click="handdlePagination">teste</button>
+    <NewPagination :allpages="pages" :currentPage="page" @changePage="handdlePagination"/>
   </div>
 </template>
 
@@ -21,16 +21,30 @@
 import gql from 'graphql-tag'
 import EpisodeCard from '@/stories/components/EpisodeCard/EpisodeCard.vue'
 import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
+import NewPagination from '@/stories/components/Pagination/Pagination.vue'
 
 export default {
   name: 'EpisodesPage',
   components: {
     EpisodeCard,
-    NewGrid
+    NewGrid,
+    NewPagination
   },
   data: () => ({
     page: 1
   }),
+  computed:{
+    pages(){
+      const pagesAux = [];
+      for(let i = 1; i <= this.episodes.info.pages; i++){
+        pagesAux.push(i);
+      }
+      return pagesAux;
+    },
+    currentPage(){
+      return 3
+    }
+  },
   apollo: {
     episodes: {
       query : gql`query episodes($page: Int!){
@@ -60,9 +74,8 @@ export default {
   },
 
    methods:{
-      handdlePagination(){
-        this.page++;
-        console.log(this.page)
+      handdlePagination(pageParm){
+        this.page = pageParm;
 
         this.$apollo.queries.episodes.fetchMore({
         variables: {
@@ -75,7 +88,8 @@ export default {
             episodes: {
               __typename: previousResult.episodes.__typename,
               info: previousResult.episodes.info,
-              results: [...previousResult.episodes.results, ...newEps]
+              // results: [...previousResult.episodes.results, ...newEps]
+              results: newEps
             },
           }
         },
