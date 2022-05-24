@@ -1,4 +1,9 @@
-
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .container-characters-home{
+    width: 100%;
     background: rgb(36, 40, 47);
 }

@@ -8,23 +8,41 @@
     margin: 0.75rem;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    @media (max-width:800px) {
+        flex-direction: column;
+        width: 300px;
+        height: 570px;
+    }
 }
 .character-card-column-image{
     > img{
         height: 220px;
         width: 220px;  
+        @media (max-width:800px) {
+            width: 300px;
+            height: 300px;
+        }
     }
 }
 .character-card-column-info{
     display: flex;
     flex-direction: column;
     padding: 13.5px;
+    @media (max-width:800px) {
+        height: 100%;
+    }
 }
 .character-card-info{
     align-items: flex-start;
     flex: 1 1 0%;
     display: flex;
     flex-direction: column;
+    .character-card-name{
+        &:hover{
+            cursor: pointer;
+            color:#ff9800;
+        }
+    }
     > h2, > .character-card-status{
         color: #f5f5f5;
     }
