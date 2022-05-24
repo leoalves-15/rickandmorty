@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <SearchBox/>
     <NewGrid :columns="'two-columns'">
       <CharacterCard 
         v-for="character in characters.results" :key="character.id"
@@ -11,7 +12,7 @@
         :location="character.location"
       />
     </NewGrid>
-    <NewPagination :allpages="pages" :currentPage="page" @changePage="handdlePagination"/>
+    <NewPagination :allpages="pages" :currentPage="characters.info.next ? characters.info.next - 1 : characters.info.pages" @changePage="handdlePagination"/>
   </div>
 </template>
 
@@ -21,12 +22,14 @@ import gql from 'graphql-tag'
 import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
 import CharacterCard from '@/stories/components/CharacterCard/CharacterCard.vue'
 import NewPagination from '@/stories/components/Pagination/Pagination.vue'
+import SearchBox from '@/stories/components/SearchBox/searchBox.vue'
 
 export default {
   name: 'CharacterPage',
   components: {
     NewGrid,
     CharacterCard,
+    SearchBox,
     NewPagination
   },
   data: () => ({
@@ -46,7 +49,8 @@ export default {
       query : gql`query characters($page: Int!){
       characters(page: $page){
         info{
-          pages
+          pages,
+          next
         }
            results{
              id,
@@ -80,13 +84,14 @@ export default {
           page: this.page,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          const newEps = fetchMoreResult.characters.results
+          const newCharacter = fetchMoreResult.characters.results
+          const newInfo = fetchMoreResult.characters.info
 
           return {
             characters: {
               __typename: previousResult.characters.__typename,
-              info: previousResult.characters.info,
-              results: newEps
+              info: newInfo,
+              results: newCharacter
             },
           }
         },

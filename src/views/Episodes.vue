@@ -12,7 +12,7 @@
         />
       </NewGrid>
     </div>
-    <NewPagination :allpages="pages" :currentPage="page" @changePage="handdlePagination"/>
+    <NewPagination :allpages="pages" :currentPage="episodes.info.next ? episodes.info.next - 1 : episodes.info.pages" @changePage="handdlePagination"/>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     NewPagination
   },
   data: () => ({
-    page: 1
+    page:  1 
   }),
   computed:{
     pages(){
@@ -46,7 +46,8 @@ export default {
       query : gql`query episodes($page: Int!){
       episodes(page: $page){
         info{
-          pages
+          pages,
+          next
         }
         results{
           id,
@@ -76,11 +77,12 @@ export default {
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newEps = fetchMoreResult.episodes.results
+          const newInfo = fetchMoreResult.episodes.info
 
           return {
             episodes: {
               __typename: previousResult.episodes.__typename,
-              info: previousResult.episodes.info,
+              info: newInfo,
               results: newEps
             },
           }
