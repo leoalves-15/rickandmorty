@@ -27,7 +27,7 @@ export default {
   components: {
     EpisodeCard,
     NewGrid
-},
+  },
   data: () => ({
     page: 1
   }),

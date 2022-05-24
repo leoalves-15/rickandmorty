@@ -13,8 +13,8 @@ const Template = (args, { argTypes }) => ({
   template: '<EpisodeCard  v-bind="$props"/>',
 });
 
-export const Morty = Template.bind({});
-Morty.args = {
+export const Pilot = Template.bind({});
+Pilot.args = {
   id: "1",
   name: "Pilot",
   air_date: "December 2, 2013",
