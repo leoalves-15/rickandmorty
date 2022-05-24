@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div>
+      <SearchBox @changeSearch="(Term) => {this.shearchTerm = Term; handdlePagination(1)}"/>
       <NewGrid :columns="four-columns">
         <EpisodeCard
           v-for="episode in episodes.results" :key="episode.id"
@@ -12,12 +13,13 @@
         />
       </NewGrid>
     </div>
-    <NewPagination :allpages="pages" :currentPage="episodes.info.next ? episodes.info.next - 1 : episodes.info.pages" @changePage="handdlePagination"/>
+    <NewPagination v-if="pages.length > 1" :allpages="pages" :currentPage="episodes.info.next ? episodes.info.next - 1 : episodes.info.pages" @changePage="handdlePagination"/>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
+import SearchBox from '@/stories/components/SearchBox/searchBox.vue'
 import EpisodeCard from '@/stories/components/EpisodeCard/EpisodeCard.vue'
 import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
 import NewPagination from '@/stories/components/Pagination/Pagination.vue'
@@ -27,7 +29,13 @@ export default {
   components: {
     EpisodeCard,
     NewGrid,
+    SearchBox,
     NewPagination
+  },
+  data: function() {
+  return {
+    shearchTerm : ""
+  };
   },
   computed:{
     pages(){
@@ -40,8 +48,8 @@ export default {
   },
   apollo: {
     episodes: {
-      query : gql`query episodes($page: Int!){
-      episodes(page: $page){
+      query : gql`query episodes($page: Int!, $searchName: String){
+      episodes(page: $page, filter: {name: $searchName}){
         info{
           pages,
           next
@@ -59,7 +67,8 @@ export default {
       }
     }`,
     variables: {
-      page: 1
+      page: 1,
+      searchName: ''
     },
     },
   },
@@ -69,6 +78,7 @@ export default {
         this.$apollo.queries.episodes.fetchMore({
         variables: {
           page: pageParm,
+          searchName: this.shearchTerm
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newEps = fetchMoreResult.episodes.results

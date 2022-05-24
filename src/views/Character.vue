@@ -12,7 +12,7 @@
         :location="character.location"
       />
     </NewGrid>
-    <NewPagination :allpages="pages" :currentPage="characters.info.next ? characters.info.next - 1 : characters.info.pages" @changePage="handdlePagination"/>
+    <NewPagination v-if="pages.length > 1" :allpages="pages" :currentPage="characters.info.next ? characters.info.next - 1 : characters.info.pages" @changePage="handdlePagination"/>
   </div>
 </template>
 
