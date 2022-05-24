@@ -6,7 +6,11 @@
     @media (max-width:800px) {
         justify-content: space-around;
     }
+    >input{
+        padding-right: 15px;
+    }
     >button{
+        padding-left: 15px;
         cursor: pointer;
         margin: 0px;
         border-radius: 0.5rem;
