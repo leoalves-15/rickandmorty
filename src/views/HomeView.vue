@@ -1,18 +1,64 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HomeBanner :title="'API'"/>
+    <div class="container-characters-home">
+      <NewGrid :columns="'two-columns-small'">
+      <CharacterCard 
+        v-for="character in characters.results.slice(0,6)" :key="character.id"
+        :image="character.image"
+        :name="character.name"
+        :status="character.status"
+        :species="character.species"
+        :origin="character.origin"
+        :location="character.location"
+        :episode="character.episode"
+      />
+    </NewGrid>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import './views-styles/Home.scss'
+import gql from 'graphql-tag'
+import HomeBanner from '@/stories/components/HomeBanner/HomeBanner.vue'
+import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
+import CharacterCard from '@/stories/components/CharacterCard/CharacterCard.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
-  }
+    HomeBanner,
+    NewGrid,
+    CharacterCard,
+  },
+   apollo: {
+    characters: {
+      query : gql`query{
+      characters(page: 1){
+        info{
+          pages,
+          next
+        }
+           results{
+             id,
+             name,
+             status,
+             species,
+             origin{
+               name
+             },
+             image,
+             location{
+               name
+             },
+             episode{
+               name
+            }
+          }
+      }
+    }`,
+    },
+  },
 }
 </script>

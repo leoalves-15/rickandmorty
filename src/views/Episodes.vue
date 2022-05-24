@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <div>
+      <HomeBanner :title="'Episódios'"/>
       <SearchBox @changeSearch="(Term) => {this.shearchTerm = Term; handdlePagination(1)}"/>
-      <NewGrid :columns="four-columns">
+      <NewGrid :columns="'four-columns'">
         <EpisodeCard
           v-for="episode in episodes.results" :key="episode.id"
           :id="episode.id"
@@ -19,6 +20,7 @@
 
 <script>
 import gql from 'graphql-tag'
+import HomeBanner from '@/stories/components/HomeBanner/HomeBanner.vue'
 import SearchBox from '@/stories/components/SearchBox/searchBox.vue'
 import EpisodeCard from '@/stories/components/EpisodeCard/EpisodeCard.vue'
 import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
@@ -28,6 +30,7 @@ export default {
   name: 'EpisodesPage',
   components: {
     EpisodeCard,
+    HomeBanner,
     NewGrid,
     SearchBox,
     NewPagination

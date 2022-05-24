@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <HomeBanner :title="'Personagens'"/>
     <SearchBox @changeSearch="(Term) => {this.shearchTerm = Term; handdlePagination(1)}"/>
     <NewGrid :columns="'two-columns'">
       <CharacterCard 
@@ -18,8 +19,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import gql from 'graphql-tag'
+import HomeBanner from '@/stories/components/HomeBanner/HomeBanner.vue'
 import NewGrid from '@/stories/components/NewGrid/NewGrid.vue'
 import CharacterCard from '@/stories/components/CharacterCard/CharacterCard.vue'
 import NewPagination from '@/stories/components/Pagination/Pagination.vue'
@@ -28,6 +29,7 @@ import SearchBox from '@/stories/components/SearchBox/searchBox.vue'
 export default {
   name: 'CharacterPage',
   components: {
+    HomeBanner,
     NewGrid,
     CharacterCard,
     SearchBox,

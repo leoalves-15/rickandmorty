@@ -1,5 +1,5 @@
 <template>
-    <div :class="columns == 'two-columns' ? 'two-columns' :'four-columns'">
+    <div :class="columns">
         <slot></slot>
     </div>
 </template>

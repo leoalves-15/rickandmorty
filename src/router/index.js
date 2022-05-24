@@ -21,11 +21,6 @@ const routes = [
     path: '/Episodes',
     name: 'Episodes',
     component: EpisodesPage
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import( '../views/AboutView.vue')
   }
 ]
 
