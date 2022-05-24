@@ -10,6 +10,7 @@
         :species="character.species"
         :origin="character.origin"
         :location="character.location"
+        :episode="character.episode"
       />
     </NewGrid>
     <NewPagination v-if="pages.length > 1" :allpages="pages" :currentPage="characters.info.next ? characters.info.next - 1 : characters.info.pages" @changePage="handdlePagination"/>

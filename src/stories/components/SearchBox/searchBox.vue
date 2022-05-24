@@ -1,18 +1,19 @@
 <template>
-    <div>
-        <input v-model="message" placeholder="Me edite">
+    <div class="search-container">
+        <input v-model="searchTerm" placeholder="Digite aqui">
         <button
-        @click="$emit('changeSearch', message)"
-        >enviar</button>
+        @click="$emit('changeSearch', searchTerm)"
+        >Buscar</button>
     </div>
 </template>
 <script>
+import './searchBox.scss';
 export default {
   name: 'SearchBox',
   emits: ['changeSearch'],
   data: function() {
     return {
-    message : ""
+    searchTerm : ""
   };
   }
 }
