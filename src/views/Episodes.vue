@@ -29,9 +29,6 @@ export default {
     NewGrid,
     NewPagination
   },
-  data: () => ({
-    page:  1 
-  }),
   computed:{
     pages(){
       const pagesAux = [];
@@ -69,11 +66,9 @@ export default {
 
    methods:{
       handdlePagination(pageParm){
-        this.page = pageParm;
-
         this.$apollo.queries.episodes.fetchMore({
         variables: {
-          page: this.page,
+          page: pageParm,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newEps = fetchMoreResult.episodes.results

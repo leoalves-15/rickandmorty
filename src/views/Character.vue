@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <SearchBox/>
+    <SearchBox @changeSearch="(Term) => {this.shearchTerm = Term; handdlePagination(1)}"/>
     <NewGrid :columns="'two-columns'">
       <CharacterCard 
         v-for="character in characters.results" :key="character.id"
@@ -32,9 +32,11 @@ export default {
     SearchBox,
     NewPagination
   },
-  data: () => ({
-    page: 1
-  }),
+  data: function() {
+  return {
+    shearchTerm : ""
+  };
+  },
   computed:{
     pages(){
       const pagesAux = [];
@@ -46,8 +48,8 @@ export default {
   },
   apollo: {
     characters: {
-      query : gql`query characters($page: Int!){
-      characters(page: $page){
+      query : gql`query characters($page: Int!, $searchName: String ){
+      characters(page: $page, filter: {name: $searchName}){
         info{
           pages,
           next
@@ -71,17 +73,17 @@ export default {
       }
     }`,
     variables: {
-      page: 1
+      page: 1,
+      searchName: ''
     },
     },
   },
   methods:{
       handdlePagination(pageParm){
-        this.page = pageParm;
-
         this.$apollo.queries.characters.fetchMore({
         variables: {
-          page: this.page,
+          page: pageParm,
+          searchName: this.shearchTerm
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newCharacter = fetchMoreResult.characters.results
@@ -96,6 +98,7 @@ export default {
           }
         },
       })
-    }},
+    }
+    },
 }
 </script>
