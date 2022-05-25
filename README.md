@@ -1,4 +1,4 @@
-# mercafacil
+# rickandmorty
 
 ## Tecnologias
 > Vue Router
