@@ -1,5 +1,15 @@
 # mercafacil
 
+## Tecnologias
+> Vue Router
+> Apollo Vue
+> Sass
+## features
+> Listar Personagens
+> Listar Eps
+> Busca por Personagens e eps
+> Paginação de busca e de listagem
+
 ## Project setup
 ```
 yarn install
