@@ -1,3 +1,5 @@
+@import '@/stories/assets/scss/_colors.scss'; 
+
 .modal-container{
     display: flex;
     justify-content: center;
@@ -22,11 +24,8 @@
         padding-left: 0;
     }
 }
-.modal-contain{
-    
-}
 .modal-content{
-    background-color: #fff;
+    background-color: $color7;
     padding: 40px;
 }
 .modal-header{
@@ -34,7 +33,7 @@
     align-items: center;
     >button{
         cursor: pointer;
-        color: #fff;
+        color: $color7;
         background-color: red;
         border: none;
         height: 40px;

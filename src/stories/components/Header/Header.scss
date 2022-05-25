@@ -1,3 +1,4 @@
+@import '@/stories/assets/scss/_colors.scss'; 
 .header-container{
     max-width: 1300px;
     width: 100%;
@@ -37,11 +38,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 18px;
             font-weight: 700;
-            color:#333333;
+            color:$color2;
             font-weight: bold;
             text-decoration: none;
             &.router-link-exact-active {
-                color: #ff9800;
+                color: $color3;
             }
         }
     }

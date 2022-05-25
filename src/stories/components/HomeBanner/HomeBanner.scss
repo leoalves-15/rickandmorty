@@ -1,3 +1,5 @@
+@import '@/stories/assets/scss/_colors.scss'; 
+
 .homebanner-container{
     display: flex;
     -webkit-box-pack: center;
@@ -10,7 +12,7 @@
     position: relative;
     >h1{
         margin: 0px;
-        color: rgb(32, 35, 41);
+        color: $color5;
         border: none;
         font-weight: 900;
         z-index: 1;

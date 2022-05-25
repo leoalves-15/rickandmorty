@@ -1,3 +1,5 @@
+@import '@/stories/assets/scss/_colors.scss'; 
+
 .search-container{
     max-width: 1300px;
     width: 100%;
@@ -16,14 +18,14 @@
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
         font-weight: 700;
-        border: 1px solid rgb(255, 152, 0);
+        border: 1px solid $color3;
         background: transparent;
-        color: rgb(51, 51, 51);
+        color: $color2;
         transition: all 0.1s ease 0s;
         &:hover{
-            background: rgb(51, 51, 51);
-            border: 1px solid rgb(51, 51, 51);
-            color: rgb(255, 152, 0);
+            background: $color2;
+            border: 1px solid $color2;
+            color: $color3;
         }
     }
 }
